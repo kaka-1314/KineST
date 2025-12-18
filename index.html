@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="A Kinematics-guided Spatiotemporal State Space Model for Human Motion Tracking from Sparse Signals.">
+  <meta name="keywords" content="KineST">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KineST: A Kinematics-guided Spatiotemporal State Space Model for Human Motion Tracking from Sparse Signals</title>
+
+  <link href="./static\css\google.css"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static\css\academicons.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/app.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="./static\js\jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">KineST: A Kinematics-guided Spatiotemporal State Space Model for Human Motion Tracking from Sparse Signals</h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <button class="button is-normal is-rounded is-dark" disabled>
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                </button>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  button[disabled] {
+    cursor: not-allowed;
+    position: relative;
+  }
+
+  button[disabled]::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    margin-left: 10px;
+    white-space: nowrap;
+    color: #f00707;
+    font-style: italic;
+    font-size: 0.9em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  button[disabled]:hover::after {
+    content: "Available after publication";
+    opacity: 1;
+  }
+</style>
+
+
+<section class="hero teaser">
+  <div class="container">
+    <div class="hero-body" style="display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+      <img src="static\images\all.png" alt="Teaser Left" style="width: 100%;">
+    </div>
+    <h2 class="subtitle has-text-centered" style="margin-top: 1em;">
+      KineST turns sparse tracking signals into full-body pose estimations and achieves superior performance compared to SOTAs.
+    </h2>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Stylized Daily Motions</h2>
+      </p>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-15_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-16_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-32_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-50_combined.mp4" type="video/mp4">
+          </video>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Athletic and Dance Motions</h2>
+      </p>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-10_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-11_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-14_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-24_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-54_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\show\CMU-147_combined.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+    </div>
+    <h2 class="subtitle has-text-centered" style="margin-top: 1em;">
+      KineST achieves high estimation accuracy in both stylized daily motions and complex athletic and dance movements.
+    </h2>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Full-body motion tracking plays an essential role in AR/VR applications, bridging physical and virtual interactions. 
+          </p>
+          <p>
+            However, Head-Mounted Displays (HMDs), the main device in AR/VR scenarios, can only provide sparse input signals, making
+            it challenging to reconstruct realistic and diverse full-body poses. Previous works attempt to solve this at high
+            computational cost or by separately modeling temporal and spatial dependencies to capture richer features, but they
+            often struggle to balance accuracy, temporal continuity, and efficiency.
+          </p>
+          <p>
+            To address this problem, we propose KineST, a novel kinematics-guided state space model that effectively extracts
+            spatiotemporal dependencies while integrating local and global pose perception. The proposed model relies on two core
+            ideas. First, we reformulate the scanning strategy within the State Space Duality framework into a kinematics-guided
+            bidirectional scanning, which embeds kinematic priors to better capture intricate joint relations. Second, we design a
+            mixed spatiotemporal modeling mechanism that tightly couples spatial and temporal contexts to maintain a balance between
+            accuracy and smoothness. Additionally, a geometric angular velocity loss is introduced to impose physically meaningful
+            constraints on rotational variations for further improving motion stability.
+          </p>
+          Through extensive experiments, KineST demonstrates superior performance in both accuracy and temporal consistency within a lightweight framework.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="static\videos\video.mp4"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Comparative Experiments</h2>
+      </p>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline >
+            <source src="static\videos\compare\195.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline >
+            <source src="static\videos\compare\91_clamp.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline >
+            <source src="static\videos\compare\94.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline >
+            <source src="static\videos\compare\8.mp4" type="video/mp4">
+          </video>
+        </div>
+    </div>
+
+  </div>
+</section>
