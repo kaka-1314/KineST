@@ -1,5 +1,5 @@
 {
-    "arch": "diffusion_DiffMLP",
+    "arch": "kinest",
     "batch_size": 256,
     "cond_mask_prob": 0.0,
     "cuda": true,
