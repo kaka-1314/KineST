@@ -1,4 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. All Rights Reserved
 import math
 import os
 import random
@@ -458,56 +457,6 @@ def evaluate_prediction(
             .cpu()
             .numpy()
         )
-    #print(eval_log['mpjre'])
-    # if eval_log['mpjre'] >0.05:
-    #     full_joint_pose = predicted_body.full_pose.cpu().numpy()
-    #     full_joint_pose_gt = gt_body.full_pose.cpu().numpy()
-    #     np.savez('./llm_out/struct_temp/{}.npz'.format(filename), pose=full_joint_pose)
-    #     np.savez('./llm_out/gt/{}.npz'.format(filename), pose=full_joint_pose_gt)
-        #print(filename)
-    # body_vertices = predicted_body.v.cpu().numpy()
-    # faces = c2c(body_model.body_model.f)
-    # body_vertices_gt = gt_body.v.cpu().numpy()
-    # gt_file = {
-    #     'body_vertices': body_vertices_gt,
-    #     'faces': faces
-    # }
-    # body_file = {
-    #     'body_vertices':body_vertices,
-    #     'faces': faces
-    # }
-    # body_path = '/Dataset2/dataxzy/pickles/{}.pkl'.format(filename)
-    # file = open(body_path,'wb')
-    # print(np.round(eval_log['lowerpe'],3))
-    # pickle.dump(body_file,file)
-    # file.close()
-    # print(body_path)
-    #
-
-    # 这是保存pkl文件的部分脚本，将body_model类中的关节节点和faces面保存下来，用于mesh文件的可视化
-    # for fId in range(predicted_body.v.shape[0]):
-    #     if fId % 120 == 0:
-    #         # continue  # 跳过一些帧（跳出该次循环，并立刻开始下次循环）
-    #         body_vertices = c2c(predicted_body.v[fId])
-    #         gt_vertices = c2c(gt_body.v[fId])
-    #         faces = c2c(body_model.body_model.f)
-    #         body_file = {
-    #             'body_vertices': body_vertices,
-    #             'faces': faces
-    #         }
-    #         # gt_path = './pickle_out/gt/{}_{}.pickle'.format(filename,fId)
-    #         model_name = "Ours"
-    #         body_path = '/Dataset2/dataxzy/Ourspickles/{}/{}_{}.pickle'.format(model_name, filename, fId)
-    #         if not os.path.exists('/Dataset2/dataxzy/Ourspickles/{}'.format(model_name)):
-    #             os.makedirs('/Dataset2/dataxzy/Ourspickles/{}'.format(model_name), exist_ok=True)
-    #         # file = open(gt_path,'wb')
-    #         # pickle.dump(gt_file,file)
-    #         # file.close()
-    #         file = open(body_path, 'wb')
-    #         # print(np.round(eval_log['lowerpe'],3))
-    #         pickle.dump(body_file, file)
-    #         file.close()
-    #         print(body_path)
 
     torch.cuda.empty_cache()
     return eval_log
@@ -529,18 +478,8 @@ def load_diffusion_model(args):
 
 def load_mlp_model(args):
 
-    ### 测试的模型结构不同
-    # model = MLP_transformer_struct_temp()
+
     body_model = train1.body_model()
-    # model = MTM_copy(
-    #     latent_dim=256,
-    #     d_state=16,
-    #     expand=2,
-    #     d_conv=4,
-    #     num_layers=4,
-    #     seq=96,
-    #     body_model=body_model
-    # )
 
     model = BiSAN_bitree_V2(
         latent_dim=256,
@@ -552,15 +491,6 @@ def load_mlp_model(args):
         body_model=body_model
     )
 
-    # model = SO3_block(
-    #     latent_dim=256,
-    #     d_state=16,
-    #     expand=2,
-    #     d_conv=4,
-    #     num_layers=4,
-    #     seq=96,
-    #     body_model=body_model
-    # )
 
     model.eval()
     state_dict = torch.load(args.model_path, map_location="cuda:0")
@@ -576,7 +506,7 @@ def main():
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
 
-    fps = 60  # AMASS_2train_1test_ dataset requires 60 frames per second
+    fps = 60  
 
     body_model = BodyModel(args.support_dir)
     print("Loading dataset...")
@@ -618,7 +548,6 @@ def main():
         # sliding window size in case of overlapping testing
         n_testframe = args.sld_wind_size
 
-    ### New code
     all_time = 0
     frames_all = 0
 
@@ -633,23 +562,11 @@ def main():
             n_testframe,
             model_type=model_type,
         )
-        # log_rot = output[0][..., :66].view(-1, 22, 3)
-        # R = exp_map_SO3(log_rot).view(-1,3,3)
-        # rot6d = utils_transform.matrot2sixd(R).view(-1, 132)
-        # output[0] = rot6d
-        # R = exp_map_SO3(log_rot)  # [B, T, 22, 3, 3]
-        # angles = torch.norm(log_rot, dim=-1).detach().cpu().numpy().flatten() * 180 / np.pi
-        # plt.hist(angles, bins=50)
-        # plt.title("Distribution of predicted joint rotation angles (degrees)")
-        # plt.show()
-        # rot6d = torch.cat([R[..., :, 0], R[..., :, 1]], dim=-1)  # [B, T, 22, 6]
-        # output[0] = rot6d.view(*output[0].shape[:1], 132)
         print("frames_sample:",frames_sample)
         frames_all += frames_sample
         print("frames_all:", frames_all)
         sample = torch.cat(output, axis=0)
 
-        ### New code
         all_time+=inference_time
 
         instance_log = evaluate_prediction(
@@ -666,7 +583,7 @@ def main():
         for key in instance_log:
             log[key] += instance_log[key]
 
-    # Print the value for all the metrics
+
     print("Metrics for the predictions")
 
     ### New code
@@ -682,4 +599,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-# python test1.py --model_path output_model/pi/model-iter-17942.pth --support_dir ./support_data/body_models --dataset_path ./dataset/AMASS
