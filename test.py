@@ -19,7 +19,7 @@ from utils.metrics import get_metric_function
 from utils.model_util import create_model_and_diffusion, load_model_wo_clip
 from utils.parser_util import sample_args
 import matplotlib.pyplot as plt
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # 设置可见的GPU设备
+os.environ["CUDA_VISIBLE_DEVICES"] = "0" 
 device = torch.device("cuda")
 
 #####################
@@ -197,9 +197,9 @@ def non_overlapping_test(
             )
         elif model_type == "mlp":
             start_time = time.time()
-            # sample, joint_feature, joint_position = model(sparse_per_batch)  # 如果模型有三个输出
-            sample, joint_position = model(sparse_per_batch) # 如果模型有两个输出
-            # sample = model(sparse_per_batch)    # 如果模型只有一个输出
+            # sample, joint_feature, joint_position = model(sparse_per_batch)  
+            sample, joint_position = model(sparse_per_batch) 
+            # sample = model(sparse_per_batch)    
             end_time = time.time()
             inference = end_time-start_time
             
@@ -462,18 +462,6 @@ def evaluate_prediction(
     return eval_log
 
 
-def load_diffusion_model(args):
-    print("Creating model and diffusion...")
-    args.arch = args.arch[len("diffusion_") :]
-    model, diffusion = create_model_and_diffusion(args)
-
-    print(f"Loading checkpoints from [{args.model_path}]...")
-    state_dict = torch.load(args.model_path, map_location="cpu")
-    load_model_wo_clip(model, state_dict)
-
-    model.to("cuda:0")  # dist_util.dev())
-    model.eval()  # disable random masking
-    return model, diffusion
 
 
 def load_mlp_model(args):
@@ -527,10 +515,7 @@ def main():
         log[metric] = 0
 
     model_type = args.arch.split("_")[0]
-    if model_type == "diffusion":
-        model, diffusion = load_diffusion_model(args)
-        sample_fn = diffusion.p_sample_loop
-    elif model_type == "mlp":
+    if model_type == "mlp":
         start_time = time.time()
         model, _ = load_mlp_model(args)
         sample_fn = None
@@ -561,9 +546,7 @@ def main():
             n_testframe,
             model_type=model_type,
         )
-        print("frames_sample:",frames_sample)
         frames_all += frames_sample
-        print("frames_all:", frames_all)
         sample = torch.cat(output, axis=0)
 
         all_time+=inference_time
