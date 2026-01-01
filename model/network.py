@@ -1,4 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. All Rights Reserved
 import torch.nn as nn
 from mamba_ssm.modules.mamba2_simple import Mamba2Simple
 import math
