@@ -2,13 +2,13 @@ import math
 import os
 import random
 import time
-import train1
 import numpy as np
 from human_body_prior.tools.omni_tools import copy2cpu as c2c
-from model.networks_a6000 import *
+from model.network import *
 import trimesh
 import pickle
 import torch
+import train
 
 from data_loaders.dataloader import load_data, TestDataset
 
@@ -478,8 +478,7 @@ def load_diffusion_model(args):
 
 def load_mlp_model(args):
 
-
-    body_model = train1.body_model()
+    body_model = train.body_model()
 
     model = BiSAN_bitree_V2(
         latent_dim=256,
