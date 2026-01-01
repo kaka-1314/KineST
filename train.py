@@ -1,4 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. All Rights Reserved
 import json
 import os
 import random
@@ -22,10 +21,9 @@ from human_body_prior.body_model.body_model import BodyModel
 
 cuda_device = 7
 seq_len = 20
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # 设置可见的GPU设备
+os.environ["CUDA_VISIBLE_DEVICES"] = "0" 
 
 
-### NEW
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
@@ -75,7 +73,6 @@ def train_mlp_model(args, dataloader):
         dmpl_fname=dmpl_fname_male,
     )
 
-    ### NEW_增加了时间参数&记录日志
     current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     log_dir = './logs/pretrain/struct_tempt' + current_time  
     writer = SummaryWriter(log_dir)
@@ -91,7 +88,7 @@ def train_mlp_model(args, dataloader):
     )
     # print(model)
 
-    # model.load_state_dict(torch.load('output_model/tree/‎smooth_loss/model-iter-161470.pth'))
+    # model.load_state_dict(torch.load('pretrained/model/path'))
     model.train()
 
     if num_gpus > 1:
