@@ -1,9 +1,11 @@
 # KineST: A Kinematics-guided Spatiotemporal State Space Model for Human Motion Tracking from Sparse Signals
 
+[![Page](https://img.shields.io/badge/Project-Page-blue?style=flat&logo=googlechrome&logoColor=white)](https://kaka-1314.github.io/KineST/)
 [![arXiv](https://img.shields.io/badge/arXiv-2512.16791-B31B1B.svg)](https://arxiv.org/abs/2512.16791)
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 [![PyTorch 2.3.1](https://img.shields.io/badge/PyTorch-2.3.1-EE4C2C.svg)](https://pytorch.org/get-started/locally/)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
 > **Shuting Zhao, Zeyu Xiao, Xinrong Chen**
 >
 > **AAAI 2026** (Accepted)
@@ -114,5 +116,6 @@ If you find our work inspiring or use our codebase in your research, please cons
   year={2025}
 }
 ```
+
 
 
