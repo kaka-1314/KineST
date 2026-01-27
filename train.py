@@ -15,7 +15,6 @@ from runner.training_loop import TrainLoop
 from torchstat import stat
 from utils import dist_util
 
-from utils.model_util import create_model_and_diffusion
 from utils.parser_util import train_args
 from human_body_prior.body_model.body_model import BodyModel
 
