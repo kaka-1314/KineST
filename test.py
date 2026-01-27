@@ -567,9 +567,9 @@ def main():
 
     print("Metrics for the predictions")
 
-    ### New code
-    print("all_time:", all_time)
-    print('average_time={}'.format(all_time/len(dataset)))
+    # ### New code
+    # print("all_time:", all_time)
+    # print('average_time={}'.format(all_time/len(dataset)))
 
     for metric in pred_metrics:
         print(log[metric] / len(dataset) * metrics_coeffs[metric])
