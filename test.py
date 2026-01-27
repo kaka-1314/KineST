@@ -16,7 +16,6 @@ from human_body_prior.body_model.body_model import BodyModel as BM
 from tqdm import tqdm
 from utils import utils_transform, utils_visualize
 from utils.metrics import get_metric_function
-from utils.model_util import create_model_and_diffusion, load_model_wo_clip
 from utils.parser_util import sample_args
 import matplotlib.pyplot as plt
 os.environ["CUDA_VISIBLE_DEVICES"] = "0" 
