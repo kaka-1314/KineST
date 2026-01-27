@@ -1,22 +1,7 @@
-# MIT License
-# Copyright (c) 2021 OpenAI
-#
-# This code is based on https://github.com/openai/guided-diffusion
-# MIT License
-# Copyright (c) 2022 Guy Tevet
-#
-# This code is based on https://github.com/GuyTevet/motion-diffusion-model
-# Copyright (c) Meta Platforms, Inc. All Rights Reserved
-
 import functools
-
 import os
-
 import torch
 
-# from diffusion import logger
-# from diffusion.fp16_util import MixedPrecisionTrainer
-# from diffusion.resample import create_named_schedule_sampler, LossAwareSampler
 from torch.optim import AdamW
 from tqdm import tqdm
 from utils import dist_util
