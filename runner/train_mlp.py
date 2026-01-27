@@ -1,14 +1,11 @@
-# Copyright (c) Meta Platforms, Inc. All Rights Reserved
 from operator import concat
 
 import torch
 from torchstat import stat
 import torch.nn as nn
-from model.networks_a6000 import log_map_SO3
-# import train_mamba2p_trans_struct
-import train1
+# from model.networks_a6000 import log_map_SO3
+
 import torch.nn.functional as F
-from model.networks import M2SP_transformer_struct_temp_loss1 as model1
 from human_body_prior.body_model.body_model import BodyModel
 from utils import utils_transform
 
